@@ -2,7 +2,7 @@ package upload
 
 import (
 	"errors"
-	"github.com/evoL/gif/image"
+	"github.com/jakewarren/gif/image"
 )
 
 type ImageUploader interface {

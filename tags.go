@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/codegangsta/cli"
-	"github.com/evoL/gif/store"
+	"github.com/jakewarren/gif/store"
 	"os"
 	"text/tabwriter"
 )

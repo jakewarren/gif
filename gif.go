@@ -3,14 +3,15 @@ package main
 import (
 	"errors"
 	"fmt"
-	"github.com/codegangsta/cli"
-	"github.com/evoL/gif/config"
-	"github.com/evoL/gif/store"
-	"github.com/evoL/gif/version"
 	"net/url"
 	"os"
 	"regexp"
 	"strings"
+
+	"github.com/codegangsta/cli"
+	"github.com/jakewarren/gif/config"
+	"github.com/jakewarren/gif/store"
+	"github.com/jakewarren/gif/version"
 )
 
 func main() {
@@ -128,6 +129,12 @@ func main() {
 			Name:   "path",
 			Usage:  "Lists paths to images",
 			Action: PathCommand,
+			Flags:  getFlags,
+		},
+		{
+			Name:   "open",
+			Usage:  "Opens an image using xdg-open",
+			Action: OpenCommand,
 			Flags:  getFlags,
 		},
 		{

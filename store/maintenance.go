@@ -2,8 +2,8 @@ package store
 
 import (
 	"bufio"
-	"github.com/evoL/gif/config"
-	"github.com/evoL/gif/store/migrations"
+	"github.com/jakewarren/gif/config"
+	"github.com/jakewarren/gif/store/migrations"
 	"github.com/rubenv/sql-migrate"
 	"io/ioutil"
 	"os"

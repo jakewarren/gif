@@ -3,13 +3,14 @@ package store
 import (
 	"database/sql"
 	"fmt"
-	"github.com/evoL/gif/config"
-	"github.com/evoL/gif/db"
-	. "github.com/evoL/gif/image"
 	"io/ioutil"
 	"os"
 	"path"
 	"time"
+
+	"github.com/jakewarren/gif/config"
+	"github.com/jakewarren/gif/db"
+	. "github.com/jakewarren/gif/image"
 )
 
 type Store struct {
@@ -22,6 +23,7 @@ type ExportedImage struct {
 	Url     string
 	Tags    []string
 	AddedAt string
+	Type    string
 }
 
 type ExportFormat struct {
@@ -65,7 +67,7 @@ func (store *Store) Add(image *Image) error {
 	if err != nil {
 		return err
 	}
-	stmt, err := tx.Prepare("INSERT INTO images (id, url, added_at) VALUES (?, ?, ?)")
+	stmt, err := tx.Prepare("INSERT INTO images (id, url, added_at, type) VALUES (?, ?, ?, ?)")
 	if err != nil {
 		return err
 	}
@@ -78,10 +80,12 @@ func (store *Store) Add(image *Image) error {
 		addedAt = *image.AddedAt
 	}
 
+	imgType := image.Type
+
 	if image.Url == "" {
-		_, err = stmt.Exec(image.Id, sql.NullString{}, addedAt)
+		_, err = stmt.Exec(image.Id, sql.NullString{}, addedAt, imgType)
 	} else {
-		_, err = stmt.Exec(image.Id, image.Url, addedAt)
+		_, err = stmt.Exec(image.Id, image.Url, addedAt, imgType)
 	}
 	if err != nil {
 		return err
@@ -97,7 +101,7 @@ func (store *Store) Close() error {
 }
 
 func (store *Store) PathFor(image *Image) string {
-	return path.Join(store.path, image.Id+".gif")
+	return path.Join(store.path, image.Id+"."+image.Type)
 }
 
 func (s *Store) WriteImage(img *Image) error {
@@ -148,7 +152,7 @@ func (store *Store) List(filter Filter) (result []Image, err error) {
 	// performance hit.
 
 	queryString := fmt.Sprintf(`
-	SELECT id, tag, url, added_at
+	SELECT id, tag, url, added_at,type
 	FROM (
 		SELECT DISTINCT images.*
 		FROM images
@@ -174,9 +178,10 @@ func (store *Store) List(filter Filter) (result []Image, err error) {
 			url     sql.NullString
 			addedAt time.Time
 			tag     sql.NullString
+			imgType string
 		)
 
-		err = rows.Scan(&id, &tag, &url, &addedAt)
+		err = rows.Scan(&id, &tag, &url, &addedAt, &imgType)
 		if err != nil {
 			return
 		}
@@ -196,6 +201,7 @@ func (store *Store) List(filter Filter) (result []Image, err error) {
 			// Create a new image
 			img.Id = id
 			img.AddedAt = &addedAt
+			img.Type = imgType
 			if url.Valid {
 				img.Url = url.String
 			} else {

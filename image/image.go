@@ -7,6 +7,8 @@ import (
 	"io/ioutil"
 	"net/http"
 	"time"
+
+	filetype "gopkg.in/h2non/filetype.v1"
 )
 
 type Image struct {
@@ -16,6 +18,7 @@ type Image struct {
 	Data    []byte
 	AddedAt *time.Time
 	Size    uint64
+	Type    string
 }
 
 func (i *Image) IsHydrated() bool {
@@ -65,6 +68,11 @@ func FromData(data []byte) *Image {
 	image := &Image{Data: data}
 	image.Id = image.generateId()
 	image.Size = uint64(len(data))
+
+	kind, _ := filetype.Match(data)
+
+	image.Type = kind.Extension
+
 	return image
 }
 

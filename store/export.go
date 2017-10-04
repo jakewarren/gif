@@ -6,7 +6,7 @@ import (
 	"bytes"
 	"compress/gzip"
 	"encoding/json"
-	"github.com/evoL/gif/image"
+	"github.com/jakewarren/gif/image"
 	"io"
 	"os"
 	"time"

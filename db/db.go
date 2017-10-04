@@ -5,7 +5,7 @@ package db
 
 import (
 	"database/sql"
-	"github.com/evoL/gif/config"
+	"github.com/jakewarren/gif/config"
 	_ "github.com/mattn/go-sqlite3"
 	"os"
 	"path"

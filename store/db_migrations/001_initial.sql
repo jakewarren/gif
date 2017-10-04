@@ -2,7 +2,8 @@
 CREATE TABLE images (
   id VARCHAR(40) PRIMARY KEY,
   url TEXT,
-  added_at DATETIME NOT NULL
+  added_at DATETIME NOT NULL,
+  type VARCHAR(10)
 );
 
 CREATE TABLE image_tags (

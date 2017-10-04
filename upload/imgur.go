@@ -4,8 +4,8 @@ import (
 	"bytes"
 	"encoding/json"
 	"errors"
-	"github.com/evoL/gif/image"
-	"github.com/evoL/gif/version"
+	"github.com/jakewarren/gif/image"
+	"github.com/jakewarren/gif/version"
 	"mime/multipart"
 	"net/http"
 )

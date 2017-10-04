@@ -4,7 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"github.com/codegangsta/cli"
-	"github.com/evoL/gif/store"
+	"github.com/jakewarren/gif/store"
 	"os"
 	"regexp"
 )

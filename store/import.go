@@ -2,7 +2,7 @@ package store
 
 import (
 	"encoding/json"
-	"github.com/evoL/gif/image"
+	"github.com/jakewarren/gif/image"
 	"io"
 )
 
