@@ -1,5 +1,4 @@
 # gif
-[![Build Status](https://travis-ci.org/evoL/gif.svg?branch=master)](https://travis-ci.org/evoL/gif)
 
 A command-line image library manager for nerds.
 
@@ -7,26 +6,35 @@ Its main use case is to manage a library with tags and URLs for fast sharing. Wr
 
 [![Screencast](https://asciinema.org/a/25986.png)](https://asciinema.org/a/25986)
 
+## Fork Modifications
+
+- Support for non-gif image files
+- Added an `open` command to quickly open an image
+
+### Known Issues
+
+I was lazy and didn't write a proper migration, so if you are an existing `gif` user your DB may be incompatible.
+
 ## Installation
 
 ### `go get`
 
 If you have [Go](http://golang.org/) installed, you can use `go get` to install `gif` along with the sources:
 ```
-go get github.com/evoL/gif
+go get github.com/jakewarren/gif
 ```
 
 The code is being developed on Go 1.6.2.
 
 ### Binaries
 
-Every stable release is available for download on [GitHub](https://github.com/evoL/gif/releases). Builds are prepared for following systems:
+Every stable release is available for download on [GitHub](https://github.com/jakewarren/gif/releases). Builds are prepared for following systems:
 
 - Linux i386 / amd64
 - OS X (Darwin) 64-bit
 - Windows 32-bit / 64-bit
 
-To install, [download the latest release](https://github.com/evoL/gif/releases) for your system and put it somewhere in your PATH.
+To install, [download the latest release](https://github.com/jakewarren/gif/releases) for your system and put it somewhere in your PATH.
 
 ## Usage
 
@@ -196,6 +204,6 @@ gif import path/to/directory
 
 Contributions are welcome! If you have something to add or you found a bug, file an issue or send a pull request.
 
-License: [MIT](https://github.com/evoL/gif/blob/master/LICENSE)
+License: [MIT](https://github.com/jakewarren/gif/blob/master/LICENSE)
 
 Copyright © 2015–2016 Rafał Hirsz.
